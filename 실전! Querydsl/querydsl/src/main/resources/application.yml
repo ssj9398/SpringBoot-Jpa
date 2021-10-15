@@ -19,3 +19,6 @@ logging.level:
   org.hibernate.SQL: debug
   # ?? ? ??
   org.hibernate.type: trace
+
+  # JPQL??
+  use_sql_comments: true
