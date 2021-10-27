@@ -65,7 +65,7 @@ class MemberJpaRepositoryTest {
 
         List<MemberTeamDto> result = memberJpaRepository.search(condition);
         for (MemberTeamDto memberTeamDto : result) {
-            System.out.println(" result "+memberTeamDto);
+            System.out.println(" result ==== "+memberTeamDto);
         }
 
         System.out.println(QMember.member.username);
