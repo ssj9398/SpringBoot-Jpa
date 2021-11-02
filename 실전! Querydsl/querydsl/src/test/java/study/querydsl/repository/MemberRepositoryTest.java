@@ -99,6 +99,18 @@ class MemberRepositoryTest {
         Assertions.assertThat(result.getContent()).extracting("username").containsExactly("member1","member2", "member3");
     }
 
+    @Test
+    public void querydslPredicateExcutorTest(){
+        QMember qMember = QMember.member;
+        Iterable<Member> result = memberRepository.findAll(
+                qMember.age.between(10, 40)
+                .and(qMember.username.eq("test")));
+        for (Member member : result) {
+            System.out.println("Member " + member);
+
+        }
+    }
+
 
 
 }
