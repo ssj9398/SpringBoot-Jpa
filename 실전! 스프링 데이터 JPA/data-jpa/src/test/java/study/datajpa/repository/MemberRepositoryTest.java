@@ -194,7 +194,9 @@ class MemberRepositoryTest {
         //when
         PageRequest pageRequest = PageRequest.of(0, 3, Sort.by(Sort.Direction.DESC, "username"));
         //Page<Member> page = memberRepository.findByAge(10, pageRequest);
-        Slice<Member> page = memberRepository.findByAge(10, pageRequest);
+        Page<Member> page = memberRepository.findByAge(10, pageRequest);
+
+        Page<MemberDto> toMap = page.map(m -> new MemberDto(m.getId(), m.getUsername(), null));
 
         //then
         List<Member> content = page.getContent(); //조회된 데이터
