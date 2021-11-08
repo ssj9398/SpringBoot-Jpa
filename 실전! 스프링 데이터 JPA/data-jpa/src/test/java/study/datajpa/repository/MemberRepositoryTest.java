@@ -36,6 +36,9 @@ class MemberRepositoryTest {
     @Autowired
     TeamRepository teamRepository;
 
+    @Autowired
+    MemberQueryRepository memberQueryRepository;
+
     @Test
     public void testMember() {
         Member member = new Member("MemberA");
@@ -295,5 +298,10 @@ class MemberRepositoryTest {
         List<Member> result = memberRepository.findLockByUsername("member1");
 
 
+    }
+
+    @Test
+    public void callCustm(){
+        List<Member> results = memberRepository.findMemberCustom();
     }
 }
