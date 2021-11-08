@@ -234,4 +234,34 @@ class MemberRepositoryTest {
         assertThat(resultCount).isEqualTo(3);
 
     }
+
+    @Test
+    public void findMemberLazy(){
+        //givn
+        //member1 -> teamA
+        //member2 -> teamB
+        Team teamA = new Team("teamA");
+        Team teamB = new Team("teamB");
+        teamRepository.save(teamA);
+        teamRepository.save(teamB);
+
+        Member memberA = new Member("Member1",10,teamA);
+        Member memberB = new Member("Member2",20,teamB);
+        memberRepository.save(memberA);
+        memberRepository.save(memberB);
+
+        em.flush();
+        em.clear();
+
+        //when
+        //select Member 1
+        List<Member> members = memberRepository.findAll();
+
+        for (Member member : members) {
+            System.out.println("member = " + member.getUsername());
+            System.out.println("member .teamClass = " + member.getTeam().getClass());
+            System.out.println("member.team = " +member.getTeam().getName());
+        }
+
+    }
 }
