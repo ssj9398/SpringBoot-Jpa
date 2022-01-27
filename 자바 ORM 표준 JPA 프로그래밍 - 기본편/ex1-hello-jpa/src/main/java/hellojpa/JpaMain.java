@@ -29,8 +29,11 @@ public class JpaMain {
 //
 //            //영속
             Member member = new Member(200L, "member200");
-            em.persist(member);
-            em.flush();
+            member.setName("AAAA");
+            em.detach(member);     // 특정 엔티티만 준영속 상태로 전환
+            //em.clear();   영속성 컨텍스트 완전 초기화
+//            em.persist(member);
+//            em.flush();
             System.out.println("=================");
 //            System.out.println("=== BEFORE ===");
 //            em.persist(member);
