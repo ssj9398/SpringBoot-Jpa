@@ -28,8 +28,8 @@ public class JpaMain {
 //            member.setName("HelloJPA");
 //
 //            //영속
-            Member member = new Member(200L, "member200");
-            member.setName("AAAA");
+            Member member = new Member();
+            member.setUsername("AAAA");
             em.detach(member);     // 특정 엔티티만 준영속 상태로 전환
             //em.clear();   영속성 컨텍스트 완전 초기화
 //            em.persist(member);
