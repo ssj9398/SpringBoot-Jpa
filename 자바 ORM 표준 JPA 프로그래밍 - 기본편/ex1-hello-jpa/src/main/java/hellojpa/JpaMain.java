@@ -17,31 +17,26 @@ public class JpaMain {
         tx.begin();
 
         try {
-////          //비영속
-//            Member member1 = new Member(150L, "A");
-//            Member member2 = new Member(160L,"B");
-//
-//            em.persist(member1);
-//            em.persist(member2);
-//            System.out.println("====================");
-//            member.setId(101L);
-//            member.setName("HelloJPA");
-//
-//            //영속
+            //팀 저장
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
+            //회원 저장
             Member member = new Member();
-            member.setUsername("AAAA");
-            em.detach(member);     // 특정 엔티티만 준영속 상태로 전환
-            //em.clear();   영속성 컨텍스트 완전 초기화
-//            em.persist(member);
-//            em.flush();
-            System.out.println("=================");
-//            System.out.println("=== BEFORE ===");
-//            em.persist(member);
-//            System.out.println("=== AFTER ===");
-//
-//            Member findMember = em.find(Member.class, 101L);
-//            System.out.println("findMember.id = " + findMember.getId());
-//            System.out.println("findMember.name = " + findMember.getName());
+            member.setName("member1");
+            member.setTeam(team);
+
+            em.persist(member);
+
+            em.flush();
+            em.clear();
+
+            //조회
+            Member findMember = em.find(Member.class, member.getId());
+            List<Member> members = findMember.getTeam().getMembers();
+            for (Member member1 : members) {
+                System.out.println("member1 = " + member1.getName());
+            }
 
             tx.commit();
         }catch (Exception e){
