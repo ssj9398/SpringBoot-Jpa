@@ -27,10 +27,10 @@
 </br>
 
 ## 생산성 - JPA와 CRUD
-• 저장: jpa.persist(member)
-• 조회: Member member = jpa.find(memberId)
-• 수정: member.setName(“변경할 이름”)
-• 삭제: jpa.remove(member)
+- 저장: jpa.persist(member)
+- 조회: Member member = jpa.find(memberId)
+- 수정: member.setName(“변경할 이름”)
+- 삭제: jpa.remove(member)
 
 ## JPA와 패러다임의 불일치 해결
 - JPA와 상속
@@ -57,69 +57,70 @@
 
 # JPA 시작
 ## H2데이터베이스 설치와 실행
-• 최고의 실습용 DB
-• 가볍다.(1.5M)
-• 웹용 쿼리툴 제공
-• MySQL, Oracle 데이터베이스 시뮬레이션 기능
-• 시퀀스, AUTO INCREMENT 기능 지원
+- 최고의 실습용 DB
+- 가볍다.(1.5M)
+- 웹용 쿼리툴 제공
+- MySQL, Oracle 데이터베이스 시뮬레이션 기능
+- 시퀀스, AUTO INCREMENT 기능 지원
 
 </br>
 
 ## 데이터베이스 방언
 ### 방언 1
 JPA는 특정 데이터베이스에 종속 X
-• 각각의 데이터베이스가 제공하는 SQL 문법과 함수는 조금씩 다름
-  • 가변 문자: MySQL은 VARCHAR, Oracle은 VARCHAR2
-  • 문자열을 자르는 함수: SQL 표준은 SUBSTRING(), Oracle은 SUBSTR()
-  • 페이징: MySQL은 LIMIT , Oracle은 ROWNUM
-• 방언: SQL 표준을 지키지 않는 특정 데이터베이스만의 고유한 기능
+- 각각의 데이터베이스가 제공하는 SQL 문법과 함수는 조금씩 다름
+  - 가변 문자: MySQL은 VARCHAR, Oracle은 VARCHAR2
+  - 문자열을 자르는 함수: SQL 표준은 SUBSTRING(), Oracle은 SUBSTR()
+  - 페이징: MySQL은 LIMIT , Oracle은 ROWNUM
+- 방언: SQL 표준을 지키지 않는 특정 데이터베이스만의 고유한 기능
 
 </br>
 
 ### 방언 2
-• hibernate.dialect 속성에 지정
-  • H2 : org.hibernate.dialect.H2Dialect
-  • Oracle 10g : org.hibernate.dialect.Oracle10gDialect
-  • MySQL : org.hibernate.dialect.MySQL5InnoDBDialect
-• 하이버네이트는 40가지 이상의 데이터베이스 방언 지원
+- hibernate.dialect 속성에 지정
+  - H2 : org.hibernate.dialect.H2Dialect
+  - Oracle 10g : org.hibernate.dialect.Oracle10gDialect
+  - MySQL : org.hibernate.dialect.MySQL5InnoDBDialect
+- 하이버네이트는 40가지 이상의 데이터베이스 방언 지원
 
 </br>
 
 ## 엔티티 주의사항
-• 엔티티 매니저 팩토리는 하나만 생성해서 애플리케이션 전체에서 공유
-• 엔티티 매니저는 쓰레드간에 공유X (사용하고 버려야 한다).
-• JPA의 모든 데이터 변경은 트랜잭션 안에서 실행
+- 엔티티 매니저 팩토리는 하나만 생성해서 애플리케이션 전체에서 공유
+- 엔티티 매니저는 쓰레드간에 공유X (사용하고 버려야 한다).
+- JPA의 모든 데이터 변경은 트랜잭션 안에서 실행
 </br>
 
 ## JPQL
-• JPA를 사용하면 엔티티 객체를 중심으로 개발
-• 문제는 검색 쿼리
-• 검색을 할 때도 테이블이 아닌 엔티티 객체를 대상으로 검색
-• 모든 DB 데이터를 객체로 변환해서 검색하는 것은 불가능
-• 애플리케이션이 필요한 데이터만 DB에서 불러오려면 결국 검색 조건이 포함된 SQL이 필요
-• JPA는 SQL을 추상화한 JPQL이라는 객체 지향 쿼리 언어 제공
-• SQL과 문법 유사, SELECT, FROM, WHERE, GROUP BY, HAVING, JOIN 지원
-• JPQL은 엔티티 객체를 대상으로 쿼리
-• SQL은 데이터베이스 테이블을 대상으로 쿼리
-• 테이블이 아닌 객체를 대상으로 검색하는 객체 지향 쿼리
-• SQL을 추상화해서 특정 데이터베이스 SQL에 의존X
-• JPQL을 한마디로 정의하면 객체 지향 SQL
-• JPQL은 뒤에서 아주 자세히 다룸
+- JPA를 사용하면 엔티티 객체를 중심으로 개발
+- 문제는 검색 쿼리
+- 검색을 할 때도 테이블이 아닌 엔티티 객체를 대상으로 검색
+- 모든 DB 데이터를 객체로 변환해서 검색하는 것은 불가능
+- 애플리케이션이 필요한 데이터만 DB에서 불러오려면 결국 검색 조건이 포함된 SQL이 필요
+- JPA는 SQL을 추상화한 JPQL이라는 객체 지향 쿼리 언어 제공
+- SQL과 문법 유사, SELECT, FROM, WHERE, GROUP BY, HAVING, JOIN 지원
+- JPQL은 엔티티 객체를 대상으로 쿼리
+- SQL은 데이터베이스 테이블을 대상으로 쿼리
+- 테이블이 아닌 객체를 대상으로 검색하는 객체 지향 쿼리
+- SQL을 추상화해서 특정 데이터베이스 SQL에 의존X
+- JPQL을 한마디로 정의하면 객체 지향 SQL
+- JPQL은 뒤에서 아주 자세히 다룸
+
 </br>
 
 ----
 
 # 영속성관리
 ## JPA에서 가장 중요한 2가지
-• 객체와 관계형 데이터베이스 매핑하기 (Object Relational Mapping)
-• 영속성 컨텍스트
+- 객체와 관계형 데이터베이스 매핑하기 (Object Relational Mapping)
+- 영속성 컨텍스트
 
 </br>
 
 ## 영속성 컨텍스트
-• JPA를 이해하는데 가장 중요한 용어
-• “엔티티를 영구 저장하는 환경”이라는 뜻
-• EntityManager.persist(entity);
+- JPA를 이해하는데 가장 중요한 용어
+- “엔티티를 영구 저장하는 환경”이라는 뜻
+- EntityManager.persist(entity);
 
 </br>
 
@@ -173,12 +174,12 @@ em.remove(member);
 </br>
 
 ## 영속성 컨텍스트의 이점
-• 1차 캐시
-• 동일성(identity) 보장
-• 트랜잭션을 지원하는 쓰기 지연
+- 1차 캐시
+- 동일성(identity) 보장
+- 트랜잭션을 지원하는 쓰기 지연
 (transactional write-behind)
-• 변경 감지(Dirty Checking)
-• 지연 로딩(Lazy Loading)
+- 변경 감지(Dirty Checking)
+- 지연 로딩(Lazy Loading)
 
 </br>
 
@@ -276,24 +277,24 @@ em.remove(memberA); //엔티티 삭제
 </br>
 
 ### 플러시 발생
-• 변경 감지
-• 수정된 엔티티 쓰기 지연 SQL 저장소에 등록
-• 쓰기 지연 SQL 저장소의 쿼리를 데이터베이스에 전송
+- 변경 감지
+- 수정된 엔티티 쓰기 지연 SQL 저장소에 등록
+- 쓰기 지연 SQL 저장소의 쿼리를 데이터베이스에 전송
 (등록, 수정, 삭제 쿼리)
 
 </br>
 
 ## 영속성 컨텍스트를 플러시하는 방법
-• em.flush() - 직접 호출
-• 트랜잭션 커밋 - 플러시 자동 호출
-• JPQL 쿼리 실행 - 플러시 자동 호출
+- em.flush() - 직접 호출
+- 트랜잭션 커밋 - 플러시 자동 호출
+- JPQL 쿼리 실행 - 플러시 자동 호출
 
 </br>
 
 ## 준영속 상태
-• 영속 -> 준영속
-• 영속 상태의 엔티티가 영속성 컨텍스트에서 분리(detached)
-• 영속성 컨텍스트가 제공하는 기능을 사용 못함
+- 영속 -> 준영속
+- 영속 상태의 엔티티가 영속성 컨텍스트에서 분리(detached)
+- 영속성 컨텍스트가 제공하는 기능을 사용 못함
 
 </br>
 
