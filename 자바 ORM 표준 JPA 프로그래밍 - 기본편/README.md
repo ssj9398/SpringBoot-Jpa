@@ -1,4 +1,8 @@
 # 자바 ORM 표준 JPA 프로그래밍 - 기본편
+
+<details markdown="1">
+<summary>1. JPA 소개</summary>
+
 # JPA 소개
 ## JPA란?
 - Java Persistence API
@@ -55,6 +59,12 @@
 
 ----
 
+</details>
+</br>
+
+<details markdown="1">
+<summary>2. JPA 시작</summary>
+
 # JPA 시작
 ## H2데이터베이스 설치와 실행
 - 최고의 실습용 DB
@@ -109,6 +119,12 @@ JPA는 특정 데이터베이스에 종속 X
 </br>
 
 ----
+
+</details>
+</br>
+
+<details markdown="1">
+<summary>3. 영속성관리</summary>
 
 # 영속성관리
 ## JPA에서 가장 중요한 2가지
@@ -307,3 +323,6 @@ em.remove(memberA); //엔티티 삭제
   - 영속성 컨텍스트를 종료
 
 ----
+
+</details>
+</br>
