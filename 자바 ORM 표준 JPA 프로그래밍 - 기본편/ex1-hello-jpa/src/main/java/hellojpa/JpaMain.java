@@ -24,16 +24,17 @@ public class JpaMain {
             //회원 저장
             Member member = new Member();
             member.setName("member1");
-            member.setTeam(team);
+            member.changeTeam(team);
 
             em.persist(member);
+//            team.getMembers().add(member);
 
             em.flush();
             em.clear();
 
             //조회
-            Member findMember = em.find(Member.class, member.getId());
-            List<Member> members = findMember.getTeam().getMembers();
+            Team findTeam = em.find(Team.class, team.getId());
+            List<Member> members = findTeam.getMembers();
             for (Member member1 : members) {
                 System.out.println("member1 = " + member1.getName());
             }
