@@ -121,3 +121,54 @@ public class HelloControllerTest {
   7. .andExpect(content().string(hello))
   - mvc.perform의 결과를 검증
   - 응답 본문의 내용을 검증
+
+### DTO 롬북 테스트 코드 작성하기
+#### HelloResponseDto 클래스 생성
+```java
+package com.ssj.webservice.springboot.web.dto;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@Getter
+@RequiredArgsConstructor
+public class HelloResponseDto {
+
+   private final String name;
+   private final int amount;
+}
+```
+- 코드설명
+  1. @RequiredArgsConstructor
+     - 선언된 모든 final 필드가 포함된 생성자를 생성
+     - final이 없는 필드는 생성자에 포함되지 않는다.
+
+#### HelloResponseDtoTest 클래스 생성
+```java
+package com.ssj.webservice.springboot.web.dto;
+
+import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+public class HelloResponseDtoTest {
+
+   @Test
+   public void 롬북_기능_테스트() {
+       //given
+       String name = "test";
+       int amount = 1000;
+
+       //when
+       HelloResponseDto dto = new HelloResponseDto(name,amount);
+
+       //then
+       assertThat(dto.getName()).isEqualTo(name);
+       assertThat(dto.getAmount()).isEqualTo(amount);
+   }
+}
+```
+
+- 코드설명
+  1. assertThat
+     - assertj라는 테스트 검증 라이브러리의 검증 메소드
+  2. isEqualTo
+     - 검증하고 싶은 대상을 메소드 인자로 받는다.
+     - 메소드 체이닝이 지원되어 isEqualTo와 같이 메소드를 이어서 사용할 수 있다.
