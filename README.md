@@ -97,30 +97,30 @@ public class HelloControllerTest {
 ```
 
 - 코드설명
-  1. @RunWith(SpringRunner.class)
-  - 테스트를 진행할 때 JUint에 내장된 실행자 외에 다른 실행자를 실행
-  - 여기서는 SpringRunner라는 스프링 실행자를 사용
-  - 즉, 스프링 부트 테스트와 JUnit 사이에 연갈자 역할
-  2. @WebMvcTest
-  - 여러 스프링 테스트 어노테이션 중, Web(Spring MVC)에 집중할 수 있는 어노테이션
-  - 선언할 경우 @Controller, @ControllerAdvice 등을 사용가능
-  - 단, @Service, @Component, @Repository 등은 사용가능
-  3. @Autowired
-  - 스프링이 관리하는 빈(Bean)을 주입 받는다.
-  4. private MockMvc mvc
-  - 웹 API를 테스트할 때 사용
-  - 스프링 MVC 테스트의 시작점
-  - 이 클래스를 통해 HTTP GET,POST 등에 대한 API 테스트를 할 수 있다.
-  5. mvc.perform(get("/hello"))
-  - MockMvc를 통해 /hello 주소로 HTTP GET 요청
-  - 체이닝이 지원되어 아래와 같이 여러 검증 기능을 이어서 선언할 수 있다.
-  6. .andExpect(status().isOk())
-  - mvc.perform의 결과를 검증
-  - HTTP Header의 Status를 검증
-  - 우리가 흔히 알고 있는 200,404,500 등의 상태를 검증
-  7. .andExpect(content().string(hello))
-  - mvc.perform의 결과를 검증
-  - 응답 본문의 내용을 검증
+  1. ```@RunWith(SpringRunner.class)```
+     - 테스트를 진행할 때 JUint에 내장된 실행자 외에 다른 실행자를 실행
+     - 여기서는 SpringRunner라는 스프링 실행자를 사용
+     - 즉, 스프링 부트 테스트와 JUnit 사이에 연갈자 역할
+  2. ```@WebMvcTest```
+     - 여러 스프링 테스트 어노테이션 중, Web(Spring MVC)에 집중할 수 있는 어노테이션
+     - 선언할 경우 @Controller, @ControllerAdvice 등을 사용가능
+     - 단, @Service, @Component, @Repository 등은 사용가능
+  3. ```@Autowired```
+     - 스프링이 관리하는 빈(Bean)을 주입 받는다.
+  4. ```private MockMvc mvc```
+     - 웹 API를 테스트할 때 사용
+     - 스프링 MVC 테스트의 시작점
+     - 이 클래스를 통해 HTTP GET,POST 등에 대한 API 테스트를 할 수 있다.
+  5. ```mvc.perform(get("/hello"))```
+     - MockMvc를 통해 /hello 주소로 HTTP GET 요청
+     - 체이닝이 지원되어 아래와 같이 여러 검증 기능을 이어서 선언할 수 있다.
+  6. ```.andExpect(status().isOk())```
+     - mvc.perform의 결과를 검증
+     - HTTP Header의 Status를 검증
+     - 우리가 흔히 알고 있는 200,404,500 등의 상태를 검증
+  7. ```.andExpect(content().string(hello))```
+     - mvc.perform의 결과를 검증
+     - 응답 본문의 내용을 검증
 
 ### DTO 롬북 테스트 코드 작성하기
 #### HelloResponseDto 클래스 생성
@@ -172,3 +172,36 @@ public class HelloResponseDtoTest {
   2. isEqualTo
      - 검증하고 싶은 대상을 메소드 인자로 받는다.
      - 메소드 체이닝이 지원되어 isEqualTo와 같이 메소드를 이어서 사용할 수 있다.
+
+
+## Spring Boot에서 JPA 사용하기
+- si 재직 당시 iBatis, MyBatis와 같은 SQL매퍼를 이용해서 데이터베이스 쿼리를 작성했다.
+  - 실제로 개발하는 시간보다 SQL을 다루는 시간이 더 많았다.
+  - 객체지향 프로그래밍이라고 하지만 객체 모델링보단 테이블 모델링에만 집중했었다.
+  - 패러다임 불일치
+    - 객체지향 프로그래밍에서 부모가 되는 객체를 가져오는 방법(부모-자식 관계)
+      ```java
+      User user = findUser();
+      Group group = user.getGroup();
+      ```
+    - SQL매퍼를 이용해 객체를 가져오는 방법 
+      ```java
+      User user = userDao.findUser();
+      Group group = groupDao.findGroup(user.getGroupId());
+      ```
+      - User 따로, Group 따로 조회하게 되며, 객체 모델링을 데이터베이스로 구현할 수 없다.
+
+### JPA란?
+- JPA는 여러 ORM 전문가가 참여한 EJB 3.0 스펙 작업에서 기존 EJB ORM이던 Entity Bean을 JPA라고 바꾸고 JavaSE, JavaEE를 위한 영속성(persistence) 관리와 ORM을 위한 표준 기술이다. JPA는 ORM 표준 기술로 Hibernate, OpenJPA, EclipseLink, TopLink Essentials과 같은 구현체가 있고 이에 표준 인터페이스가 바로 JPA이다.
+- ORM(Object Relational Mapping)이란 RDB 테이블을 객체지향적으로 사용하기 위한 기술이다. RDB 테이블은 객체지향적 특징(상속, 다형성, 레퍼런스, 오브젝트 등)이 없고 자바와 같은 언어로 접근하기 쉽지 않다. 때문에 ORM을 사용해 오브젝트와 RDB 사이에 존재하는 개념과 접근을 객체지향적으로 다루기 위한 기술이다.
+
+#### 장점
+- 객체지향적으로 데이터를 관리할 수 있기 때문에 비즈니스 로직에 집중 할 수 있으며, 객체지향 개발이 가능하다.
+- 테이블 생성, 변경, 관리가 쉽다. (JPA를 잘 이해하고 있는 경우)
+- 로직을 쿼리에 집중하기 보다는 객체자체에 집중 할 수 있다.
+- 빠른 개발이 가능하다.
+
+#### 단점
+- 어렵다. 장점을 더 극대화 하기 위해서 알아야 할게 많다.
+- 잘 이해하고 사용하지 않으면 데이터 손실이 있을 수 있다. (persistence context)
+- 성능상 문제가 있을 수 있다.(이 문제 또한 잘 이해해야 해결이 가능하다.)
